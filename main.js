@@ -17,10 +17,7 @@ createApp({
         addTask() {
 
             const data = {
-                newTask: {
-                    'text' : this.taskItem,
-                    'done' : false,
-                }
+                newTask: this.taskItem,
             };
 
             axios.post('server.php', data,
@@ -31,7 +28,21 @@ createApp({
                 this.taskList = response.data;
                 this.taskItem = '';
             });
-        }
+        },
+
+
+        doneUndone(i){
+            const data ={
+                selector : i,
+            }; 
+            axios.post('server.php', data,
+            {
+                headers: { 'Content-Type': 'multipart/form-data'}
+            }
+            ).then(response => {
+                this.taskList = response.data;
+            });
+        },
     },
     mounted() {
         this.readList();

@@ -12,7 +12,8 @@
     <div id="app">
     <div class="container">
             <ul class="list-group">
-                <li v-for="task in taskList" class="list-group-item">{{task.text}}</li>
+                <li v-for="(task,i) in taskList" class="list-group-item" :class="{'text-decoration-line-through' : task.done }" @click="doneUndone(i)" :key="i">{{task.text}}</li>
+
             </ul>
             <input v-model="taskItem" type="text"/>
             <button class="btn btn-primary" @click="addTask" >Aggiungi Task</button>
