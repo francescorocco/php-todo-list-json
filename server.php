@@ -21,11 +21,16 @@
     if (isset($_POST['selector'])) {
         $taskList[$_POST['selector']]['done'] = !$taskList[$_POST['selector']]['done'];
 
-        $json_string = json_encode($taskList);
+        $taskString = json_encode($taskList);
         file_put_contents('database.json', $taskString);
     }
 
+    if (isset($_POST['deleted'])) {
+        array_splice($taskList,$_POST['deleted'],1);
 
+        $taskString = json_encode($taskList);
+        file_put_contents('database.json', $taskString);
+    }
 
 
 
